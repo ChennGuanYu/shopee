@@ -29,15 +29,19 @@
         }
 
         body {
-            position: relative;
-            height: 100vh;
             margin: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            background-color: #fddde6;
             font-family: 'Comic Sans MS', cursive;
+            background-color: #fddde6;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            text-align: center;
         }
 
         .bg-pigs {
@@ -46,11 +50,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
             align-content: space-around;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+
+        .bg-pigs.show {
+            opacity: 1;
         }
 
         .pig {
@@ -95,27 +105,29 @@
     </style>
 </head>
 <body>
-    <button class="btn" onclick="showTitle()">按我</button>
-    <div class="title" id="title">髒髒豬</div>
-
-    <!-- 背景豬表情符號 -->
-    <div class="bg-pigs">
-        <div class="pig">🐷</div>
-        <div class="pig">🐷</div>
-        <div class="pig">🐷</div>
-        <div class="pig">🐷</div>
-        <div class="pig">🐷</div>
-        <div class="pig">🐷</div>
-        <div class="pig">🐷</div>
-        <div class="pig">🐷</div>
-        <div class="pig">🐷</div>
-        <div class="pig">🐷</div>
+    <div class="container">
+        <button class="btn" onclick="showContent()">顯示文字與背景</button>
+        <div class="title" id="title">髒髒豬</div>
+        <div class="bg-pigs" id="bgPigs">
+            <div class="pig">🐷</div>
+            <div class="pig">🐷</div>
+            <div class="pig">🐷</div>
+            <div class="pig">🐷</div>
+            <div class="pig">🐷</div>
+            <div class="pig">🐷</div>
+            <div class="pig">🐷</div>
+            <div class="pig">🐷</div>
+            <div class="pig">🐷</div>
+            <div class="pig">🐷</div>
+        </div>
     </div>
 
     <script>
-        function showTitle() {
-            // 顯示髒髒豬文字並淡入動畫
+        function showContent() {
+            // 顯示背景與文字
+            const bgPigs = document.getElementById('bgPigs');
             const title = document.getElementById('title');
+            bgPigs.classList.add('show');
             title.classList.add('show');
 
             // 隱藏按鈕
