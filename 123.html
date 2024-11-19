@@ -5,57 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>髒髒豬</title>
     <style>
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(0) rotate(-10deg);
+                opacity: 1;
+            }
+        }
+
         body {
+            position: relative;
+            overflow: hidden;
+            height: 100vh;
+            margin: 0;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background: linear-gradient(135deg, #f7cac9, #92a8d1);
-            font-family: 'Arial', sans-serif;
+            background: radial-gradient(circle, #fef3f3, #fddde6);
+            font-family: 'Comic Sans MS', cursive;
         }
 
         .title {
-            font-size: 6rem;
+            font-size: 7rem;
             font-weight: bold;
-            color: #fff;
-            text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5), 0 0 20px #ffe0e6;
-            transform: rotate(-3deg);
-            background: linear-gradient(90deg, #ff4500, #ffd700, #ff1493);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #ff69b4;
+            text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
             display: none;
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
 
         .title.show {
             display: block;
-            opacity: 1;
-            transform: scale(1.1);
+            animation: fadeIn 1s ease-in-out forwards;
         }
 
-        .emoji {
-            font-size: 4rem;
-            margin-top: 10px;
-            display: none;
-        }
-
-        .emoji.show {
-            display: block;
-            animation: bounce 1s infinite;
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .btn {
             font-size: 1.5rem;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: none;
             background-color: #ff7f50;
-            color: #fff;
-            border-radius: 5px;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            color: white;
+            border-radius: 25px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: transform 0.3s, background-color 0.3s;
         }
 
         .btn:hover {
@@ -63,48 +74,60 @@
             transform: scale(1.1);
         }
 
-        .pig-img {
-            width: 200px;
-            margin-top: 20px;
-            display: none;
+        .pig {
+            position: absolute;
+            font-size: 3rem;
+            animation: float 3s infinite ease-in-out;
         }
 
-        .pig-img.show {
-            display: block;
-            animation: fadeIn 1s;
+        .pig:nth-child(1) {
+            top: 10%;
+            left: 20%;
+            animation-duration: 4s;
         }
 
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-15px);
-            }
+        .pig:nth-child(2) {
+            top: 30%;
+            left: 70%;
+            animation-duration: 3.5s;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        .pig:nth-child(3) {
+            top: 60%;
+            left: 40%;
+            animation-duration: 5s;
+        }
+
+        .pig:nth-child(4) {
+            top: 50%;
+            left: 15%;
+            animation-duration: 4.5s;
+        }
+
+        .pig:nth-child(5) {
+            top: 70%;
+            left: 80%;
+            animation-duration: 3.8s;
         }
     </style>
 </head>
 <body>
-    <button class="btn" onclick="showContent()">顯示文字和豬</button>
+    <button class="btn" onclick="showTitle()">顯示文字</button>
     <div class="title" id="title">髒髒豬</div>
-    <div class="emoji" id="emoji">🐷🐽</div>
-    <img src="https://via.placeholder.com/200?text=%F0%9F%90%B7" alt="Pig" class="pig-img" id="pigImg">
+
+    <!-- 背景豬表情符號 -->
+    <div class="pig">🐷</div>
+    <div class="pig">🐷</div>
+    <div class="pig">🐷</div>
+    <div class="pig">🐷</div>
+    <div class="pig">🐷</div>
 
     <script>
-        function showContent() {
-            document.getElementById('title').classList.add('show');
-            document.getElementById('emoji').classList.add('show');
-            document.getElementById('pigImg').classList.add('show');
+        function showTitle() {
+            const title = document.getElementById('title');
+            title.classList.add('show');
         }
     </script>
 </body>
 </html>
+
