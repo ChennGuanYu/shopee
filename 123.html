@@ -8,29 +8,58 @@
         @keyframes float {
             0% {
                 transform: translateY(0) rotate(0deg);
-                opacity: 1;
             }
             50% {
-                transform: translateY(-20px) rotate(10deg);
-                opacity: 0.8;
+                transform: translateY(-10px) rotate(10deg);
             }
             100% {
                 transform: translateY(0) rotate(-10deg);
+            }
+        }
+
+        @keyframes fadeInScale {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
                 opacity: 1;
             }
         }
 
         body {
             position: relative;
-            overflow: hidden;
             height: 100vh;
             margin: 0;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: radial-gradient(circle, #fef3f3, #fddde6);
+            overflow: hidden;
+            background-color: #fddde6;
             font-family: 'Comic Sans MS', cursive;
+        }
+
+        .bg-pigs {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-content: space-around;
+        }
+
+        .pig {
+            font-size: 3rem;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        .pig:nth-child(odd) {
+            animation-duration: 4s;
         }
 
         .title {
@@ -38,23 +67,13 @@
             font-weight: bold;
             color: #ff69b4;
             text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
-            display: none;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.5s ease;
         }
 
         .title.show {
-            display: block;
-            animation: fadeIn 1s ease-in-out forwards;
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
+            animation: fadeInScale 1s ease forwards;
         }
 
         .btn {
@@ -73,59 +92,35 @@
             background-color: #ff4500;
             transform: scale(1.1);
         }
-
-        .pig {
-            position: absolute;
-            font-size: 3rem;
-            animation: float 3s infinite ease-in-out;
-        }
-
-        .pig:nth-child(1) {
-            top: 10%;
-            left: 20%;
-            animation-duration: 4s;
-        }
-
-        .pig:nth-child(2) {
-            top: 30%;
-            left: 70%;
-            animation-duration: 3.5s;
-        }
-
-        .pig:nth-child(3) {
-            top: 60%;
-            left: 40%;
-            animation-duration: 5s;
-        }
-
-        .pig:nth-child(4) {
-            top: 50%;
-            left: 15%;
-            animation-duration: 4.5s;
-        }
-
-        .pig:nth-child(5) {
-            top: 70%;
-            left: 80%;
-            animation-duration: 3.8s;
-        }
     </style>
 </head>
 <body>
-    <button class="btn" onclick="showTitle()">顯示文字</button>
+    <button class="btn" onclick="showTitle()">按我</button>
     <div class="title" id="title">髒髒豬</div>
 
     <!-- 背景豬表情符號 -->
-    <div class="pig">🐷</div>
-    <div class="pig">🐷</div>
-    <div class="pig">🐷</div>
-    <div class="pig">🐷</div>
-    <div class="pig">🐷</div>
+    <div class="bg-pigs">
+        <div class="pig">🐷</div>
+        <div class="pig">🐷</div>
+        <div class="pig">🐷</div>
+        <div class="pig">🐷</div>
+        <div class="pig">🐷</div>
+        <div class="pig">🐷</div>
+        <div class="pig">🐷</div>
+        <div class="pig">🐷</div>
+        <div class="pig">🐷</div>
+        <div class="pig">🐷</div>
+    </div>
 
     <script>
         function showTitle() {
+            // 顯示髒髒豬文字並淡入動畫
             const title = document.getElementById('title');
             title.classList.add('show');
+
+            // 隱藏按鈕
+            const button = document.querySelector('.btn');
+            button.style.display = 'none';
         }
     </script>
 </body>
