@@ -120,9 +120,17 @@
                 const pig = document.createElement('div');
                 pig.classList.add('pig');
                 pig.textContent = '🐷';
-                // 隨機設定每隻豬的位置
+
+                // 隨機設定每隻豬的動畫時間
                 pig.style.animationDuration = `${4 + Math.random() * 3}s`;
                 pig.style.animationDelay = `${Math.random()}s`;
+                
+                // 隨機位置設定，防止與文字重疊
+                const row = Math.floor(Math.random() * 4) + 1;  // 1 到 4 行
+                const col = Math.floor(Math.random() * 5) + 1;  // 1 到 5 列
+                pig.style.gridRowStart = row;
+                pig.style.gridColumnStart = col;
+                
                 bgPigs.appendChild(pig);
             }
         }
@@ -144,5 +152,6 @@
     </script>
 </body>
 </html>
+
 
 
