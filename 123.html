@@ -7,13 +7,13 @@
     <style>
         @keyframes float {
             0% {
-                transform: translateY(0) rotate(0deg);
+                transform: translate(0, 0);
             }
             50% {
-                transform: translateY(-10px) rotate(10deg);
+                transform: translate(calc(-50px + 100px * random()), calc(-50px + 100px * random()));
             }
             100% {
-                transform: translateY(0) rotate(-10deg);
+                transform: translate(0, 0);
             }
         }
 
@@ -51,9 +51,9 @@
             width: 100%;
             height: 100%;
             display: flex;
+            justify-content: space-between;
+            align-content: space-between;
             flex-wrap: wrap;
-            justify-content: space-around;
-            align-content: space-around;
             opacity: 0;
             transition: opacity 0.5s ease;
             z-index: -1;
@@ -65,11 +65,9 @@
 
         .pig {
             font-size: 3rem;
-            animation: float 3s infinite ease-in-out;
-        }
-
-        .pig:nth-child(odd) {
-            animation-duration: 4s;
+            animation: float 4s infinite ease-in-out alternate;
+            position: absolute;
+            animation-duration: calc(4s + random() * 3s);
         }
 
         .title {
@@ -108,21 +106,28 @@
     <div class="container">
         <button class="btn" onclick="showContent()">按我</button>
         <div class="title" id="title">髒髒豬🫵</div>
-        <div class="bg-pigs" id="bgPigs">
-            <div class="pig">🐷</div>
-            <div class="pig">🐷</div>
-            <div class="pig">🐷</div>
-            <div class="pig">🐷</div>
-            <div class="pig">🐷</div>
-            <div class="pig">🐷</div>
-            <div class="pig">🐷</div>
-            <div class="pig">🐷</div>
-            <div class="pig">🐷</div>
-            <div class="pig">🐷</div>
-        </div>
+        <div class="bg-pigs" id="bgPigs"></div>
     </div>
 
     <script>
+        function random() {
+            return Math.random();
+        }
+
+        function createPigs() {
+            const bgPigs = document.getElementById('bgPigs');
+            for (let i = 0; i < 20; i++) { // 至少 20 隻豬
+                const pig = document.createElement('div');
+                pig.classList.add('pig');
+                pig.textContent = '🐷';
+                pig.style.top = `${Math.random() * 100}%`;
+                pig.style.left = `${Math.random() * 100}%`;
+                pig.style.animationDuration = `${4 + Math.random() * 3}s`;
+                pig.style.animationDelay = `${Math.random()}s`;
+                bgPigs.appendChild(pig);
+            }
+        }
+
         function showContent() {
             // 顯示背景與文字
             const bgPigs = document.getElementById('bgPigs');
@@ -134,7 +139,11 @@
             const button = document.querySelector('.btn');
             button.style.display = 'none';
         }
+
+        // 生成背景豬
+        createPigs();
     </script>
 </body>
 </html>
+
 
