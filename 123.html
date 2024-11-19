@@ -7,6 +7,7 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -16,18 +17,94 @@
         }
 
         .title {
-            font-size: 5rem;
+            font-size: 6rem;
             font-weight: bold;
             color: #fff;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3), 0 0 15px #ffe0e6;
+            text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5), 0 0 20px #ffe0e6;
             transform: rotate(-3deg);
-            background: linear-gradient(90deg, #ff7f50, #ffd700, #ff69b4);
+            background: linear-gradient(90deg, #ff4500, #ffd700, #ff1493);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            display: none;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        .title.show {
+            display: block;
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .emoji {
+            font-size: 4rem;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .emoji.show {
+            display: block;
+            animation: bounce 1s infinite;
+        }
+
+        .btn {
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            border: none;
+            background-color: #ff7f50;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #ff4500;
+            transform: scale(1.1);
+        }
+
+        .pig-img {
+            width: 200px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .pig-img.show {
+            display: block;
+            animation: fadeIn 1s;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="title">髒髒豬</div>
+    <button class="btn" onclick="showContent()">顯示文字和豬</button>
+    <div class="title" id="title">髒髒豬</div>
+    <div class="emoji" id="emoji">🐷🐽</div>
+    <img src="https://via.placeholder.com/200?text=%F0%9F%90%B7" alt="Pig" class="pig-img" id="pigImg">
+
+    <script>
+        function showContent() {
+            document.getElementById('title').classList.add('show');
+            document.getElementById('emoji').classList.add('show');
+            document.getElementById('pigImg').classList.add('show');
+        }
+    </script>
 </body>
 </html>
